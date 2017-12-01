@@ -1,0 +1,46 @@
+* {
+    margin: 0 auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #C5EAE6;
+}
+
+header {
+    color: #137875;
+    padding: 30px 0;
+    text-align: center;
+    
+    h1 {
+        font-family: 'Barrio', cursive;
+        font-size: 4.0rem;
+
+        @include query(600px) {
+            font-size: 7.0rem;
+        }
+    }
+}
+
+
+p,
+button {
+    font-family: 'Inconsolata', monospace;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+
+    @include query(600px) {
+        font-size: 2.6rem;
+    }
+}
+
+img {
+    width: 100%;
+}
