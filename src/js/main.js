@@ -29,6 +29,7 @@ const toyry = (function () {
   let score = 0;
   let match = false;
   let matchCards = 0;
+  let idArray = [];
 
   function _randomDeck(cards) {
     const randomCards = cards.sort(function () { return 0.5 - Math.random(); });
@@ -41,15 +42,20 @@ const toyry = (function () {
     }
 
     if (!this.isClicked) {
-      const id = toys[this.index].replace('img/cards/', '').replace('.png', '');
+      const id = toys[this.index].replace('./img/cards/', '').replace('.png', '');
       const img = this.querySelector('img');
-
       previousCardId = currentCardId;
+      console.log(previousCardId);
       currentCardId = id;
-
+      console.log(currentCardId);
       previousCard = currentCard;
+      console.log(previousCard);
       currentCard = this;
+      
+      // ADD ID IN IDARRAY
+      
 
+      console.log(currentCard);
       _matchCard(id);
 
       if (match) {
@@ -73,7 +79,7 @@ const toyry = (function () {
       matchCards += 1;
       _score();
     } else {
-      match = false;      
+      match = false;
     }
   }
 
@@ -112,10 +118,34 @@ const toyry = (function () {
     });
   }
 
+    // RESET FUNCTION: FINISH
+  function _reset() {
+    document.getElementById('resetBtn').addEventListener("click", function(){
+      //
+    });
+  }
+
   function init() {
+    // Service Worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(registration => {
+          // Registration was successful
+          console.log('ServiceWorker registration successful with scope: ', registration.scope)
+        }, err => {
+          // registration failed :(
+          console.log('ServiceWorker registration failed: ', err)
+        })
+      })
+    }
     const cards = document.querySelectorAll('.cards');
     toys = _randomDeck(toys);
     _flipCard(cards);
+  }
+
+  // LOCALSTORAGE FUNCTION: FINISH
+  function localStorage(){
+
   }
 
   return {
@@ -124,3 +154,13 @@ const toyry = (function () {
 })();
 
 toyry.init();
+
+// RESET FUNCTION: FINISH
+function _reset() {
+  document.getElementById('resetBtn').addEventListener("click", function(){
+    location.reload();
+    toyry.init();
+  });
+}
+
+_reset();

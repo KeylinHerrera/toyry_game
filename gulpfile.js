@@ -20,10 +20,40 @@ var htmlmin = require('gulp-htmlmin')
 var uglify = require('gulp-uglify')
 var del = require('del')
 var imagemin = require('gulp-imagemin')
+var minify = require('minify');
+var workbox = require('workbox-build');
+var wbBuild = require('workbox-build');
 
 //
 // Begin Gulp Tasks.
 //
+
+//
+// Service worker.
+//
+gulp.task('service-worker', () => {
+  return wbBuild.injectManifest({
+    swSrc: 'app/script.js',
+    swDest: 'build/script.js',
+    globDirectory: 'build',
+    staticFileGlobs: [
+      'index.html',
+      'css/style.css'
+    ]
+  })
+  .catch((err) => {
+    console.log('[ERROR] This happened: ' + err);
+  });
+});
+
+//
+// Minify.
+//
+minify('client.js', (error, data) => {
+  if (error)
+      return console.error(error.message);
+  console.log(data);
+});
 
 //
 // HTML Dev Workflow.
