@@ -1,0 +1,16 @@
+{
+    "name": "Toyry Ganme",
+    "short_name": "Toyry",
+    "icons": [{
+      "src": "images/touch/homescreen192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }],
+    "start_url": "./index.html",
+    "dir": "ltr",
+    "lang": "en",
+    "display": "standalone",
+    "description": "The app is a memory game",
+    "background_color": "#c5eae6",
+    "orientation": "portrait"
+  }
