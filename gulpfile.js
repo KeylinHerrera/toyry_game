@@ -22,7 +22,6 @@ var del = require('del')
 var imagemin = require('gulp-imagemin')
 var minify = require('minify');
 var workbox = require('workbox-build');
-var wbBuild = require('workbox-build');
 
 //
 // Begin Gulp Tasks.
@@ -31,18 +30,19 @@ var wbBuild = require('workbox-build');
 //
 // Service worker.
 //
-gulp.task('service-worker', () => {
-  return wbBuild.injectManifest({
-    swSrc: 'app/script.js',
-    swDest: 'build/script.js',
-    globDirectory: 'build',
-    staticFileGlobs: [
-      'index.html',
-      'css/style.css'
-    ]
-  })
-  .catch((err) => {
-    console.log('[ERROR] This happened: ' + err);
+const dist = './dist';
+
+gulp.task('serviceworker', () => {
+  return workbox.generateSW({
+    globDirectory: dist,
+    globPatterns: ['**\/*.{html,js}'],
+    swDest: `${dist}/sw.js`,
+    clientsClaim: true,
+    skipWaiting: true
+  }).then(() => {
+    console.info('Service worker generation completed.');
+  }).catch((error) => {
+    console.warn('Service worker generation failed: ' + error);
   });
 });
 
