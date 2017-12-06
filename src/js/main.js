@@ -37,12 +37,18 @@ const toyry = (function () {
   }
 
   function _displayCard() {
+    if(idArray.indexOf(this.index) !== -1){
+      score -= (score == 0) ? 0 : 50;
+      _score();
+    }
+
     if (flippedCards === 2) {
       flippedCards++;
     }
 
     if (!this.isClicked) {
       const id = toys[this.index].replace('./img/cards/', '').replace('.png', '');
+      console.log('THIS', this.index);
       const img = this.querySelector('img');
       previousCardId = currentCardId;
       console.log(previousCardId);
@@ -53,6 +59,7 @@ const toyry = (function () {
       currentCard = this;
       
       // ADD ID IN IDARRAY
+      idArray.push(this.index);
       
 
       console.log(currentCard);
@@ -83,7 +90,7 @@ const toyry = (function () {
     }
   }
 
-  function _mensage() {
+  function _message() {
     if (matchCards === 10) {
       let winMsg = document.createElement('p');
       const text = document.createTextNode('You WIN!!');
@@ -95,7 +102,7 @@ const toyry = (function () {
 
   function _score() {
     document.getElementById('score').innerText = score;
-    _mensage();
+    _message();
   }
 
 
