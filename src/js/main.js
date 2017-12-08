@@ -99,7 +99,7 @@ const toyry = (() => {
         const cards = [previousCard, currentCard];
         cards.forEach((card) => {
           card.removeEventListener('click', displayCard);
-          card.classList.add('is-deleted');
+          card.classList.add('deleted');
         });
       }
 

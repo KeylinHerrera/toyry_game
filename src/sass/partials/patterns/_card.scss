@@ -52,12 +52,13 @@
 }
 
  .flipper {
-   transition: all 1.0s linear;
-   transform-style: preserve-3d;
-   position: relative;
+    position: relative;
+    transition: all 1.0s linear;
+    transform-style: preserve-3d;
+   
  }
 
-.is-deleted {
+.deleted {
   img {
     opacity: 0;
   }
